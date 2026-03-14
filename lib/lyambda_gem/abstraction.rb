@@ -1,5 +1,5 @@
 module LyambdaGem
-  // Implementation of an abstraction (lambda function) in the lambda calculus
+  #Implementation of an abstraction (lambda function) in the lambda calculus
   class Abstraction < Term
     attr_reader :parameter, :body
     
@@ -8,24 +8,29 @@ module LyambdaGem
       @body = body
     end
 
+    #Список свободных переменных
     def free_variables
-      body.free_variables - [parameter]
+      return @body.free_variables.reject{|x| x == parameter}
     end
 
-    def substitute(variable, term)
-      rescue NotImplementedError
+    #Подстановка
+    def substitute(term, variable)
+      if variable == @parameter
+        self
+      end
+      #...
     end
 
     def reduceable?
-      rescue NotImplementedError
+      @body.reduceable?
     end
 
     def reduce(strategy: :normal_order)
-      rescue NotImplementedError
+      #rescue NotImplementedError
     end
 
     def to_s
-      "λ#{parameter}.#{body}"
+      "(λ#{parameter}.#{body})"
     end
   end
 end

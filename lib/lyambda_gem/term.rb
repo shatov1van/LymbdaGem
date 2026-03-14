@@ -1,11 +1,11 @@
 module LyambdaGem
-  // Base abstract class for all terms in the lambda calculus (variables, abstractions, applications)
+  #Base abstract class for all terms in the lambda calculus (variables, abstractions, applications)
   class Term 
     def free_variables
       raise NotImplementedError, "Subclasses must implement the free_variables method"
     end
     
-    def substitute(variable, term)
+    def substitute(term, variable)
       raise NotImplementedError, "Subclasses must implement the substitute method"
     end
     

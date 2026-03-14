@@ -1,5 +1,5 @@
 module LyambdaGem
-  // Implementation of a variable in the lambda calculus
+  #Implementation of a variable in the lambda calculus
   class Variable < Term
     attr_reader :name
     
@@ -7,16 +7,17 @@ module LyambdaGem
       @name = name
     end
     
+    #Список свободных переменных
     def free_variables
       [self]
     end
     
-    def substitute(variable, term)
+    def substitute(term, variable)
       self == variable ? term : self
     end
     
     def reduceable?
-      false
+      nil
     end
     
     def reduce(strategy: :normal_order)
@@ -28,7 +29,7 @@ module LyambdaGem
     end
     
     def ==(other)
-      other.is_a?(Variable) && name == other.name
+      other.is_a?(Variable) && @name == other.name
     end
   end
 end
