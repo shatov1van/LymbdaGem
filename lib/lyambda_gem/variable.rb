@@ -9,15 +9,16 @@ module LyambdaGem
     
     #Список свободных переменных
     def free_variables
-      [self]
+      return Set.new([@name])
     end
     
+    #Подстановка
     def substitute(term, variable)
       self == variable ? term : self
     end
     
     def reduceable?
-      nil
+      false
     end
     
     def reduce(strategy: :normal_order)

@@ -10,15 +10,31 @@ module LyambdaGem
 
     #Список свободных переменных
     def free_variables
-      return @body.free_variables.reject{|x| x == parameter}
+      return @body.free_variables - Set.new([@parameter])
+    end
+
+    #Получение новой переменной относительно терма
+    def fresh_variable(term)
+      cnt = 1
+
+      while term.free_variables.include?("x#{cnt}")
+        cnt += 1
+      end
+
+      return Variable.new("x#{cnt}")     
     end
 
     #Подстановка
     def substitute(term, variable)
-      if variable == @parameter
-        self
-      end
-      #...
+
+      return self if variable == @parameter
+
+      return self if !@body.free_variables.include?(variable)
+      
+      return Abstraction.new(@parameter, @body.substitute(term, variable)) if !term.free_variables.include?(@parameter)
+
+      new_variable = fresh_variable((Application.new(term, @body)))
+      return Abstraction.new(new_variable, @body.substitute(new_variable, @parameter).substitute(term, variable))
     end
 
     def reduceable?
@@ -26,7 +42,9 @@ module LyambdaGem
     end
 
     def reduce(strategy: :normal_order)
-      #rescue NotImplementedError
+      return self unless reduceable?
+
+      return Abstraction.new(@parameter, @body.reduce)
     end
 
     def to_s

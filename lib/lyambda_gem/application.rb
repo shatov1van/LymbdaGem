@@ -10,7 +10,7 @@ module LyambdaGem
 
     #Список свободных переменных
     def free_variables 
-      return (@left + @right).uniq
+      return @left.free_variables + @right.free_variables
     end
 
     def substitute(term, variable)
@@ -22,7 +22,9 @@ module LyambdaGem
     end
 
     def reduce(strategy: :normal_order)
-      rescue NotImplementedError
+      return self unless reduceable?
+
+      return @left.substitute(@right, @left.parameter)
     end
 
     def to_s
