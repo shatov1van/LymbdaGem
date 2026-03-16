@@ -10,10 +10,10 @@ module LyambdaGem
 
     #Список свободных переменных
     def free_variables
-      return @body.free_variables - Set.new([@parameter])
+      @body.free_variables - Set.new([@parameter])
     end
 
-    #Получение новой переменной относительно терма
+    #Получение новой переменной относительно терма (для правила 7)
     def fresh_variable(term)
       cnt = 1
 
@@ -26,7 +26,7 @@ module LyambdaGem
 
     #Подстановка
     def substitute(term, variable)
-
+      #puts "p:#{@parameter} | body:#{@body} | t:#{term} | v:#{variable}"
       return self if variable == @parameter
 
       return self if !@body.free_variables.include?(variable)
@@ -42,6 +42,7 @@ module LyambdaGem
     end
 
     def reduce(strategy: :normal_order)
+      #puts "  abs:#{self.to_s} | r-able: #{reduceable?}"
       return self unless reduceable?
 
       return Abstraction.new(@parameter, @body.reduce)

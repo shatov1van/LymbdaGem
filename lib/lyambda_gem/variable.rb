@@ -9,7 +9,7 @@ module LyambdaGem
     
     #Список свободных переменных
     def free_variables
-      return Set.new([@name])
+      return Set.new([self])
     end
     
     #Подстановка
@@ -29,6 +29,10 @@ module LyambdaGem
       name.to_s
     end
     
+    def inspect
+      @name.to_s
+    end
+
     def ==(other)
       other.is_a?(Variable) && @name == other.name
     end
