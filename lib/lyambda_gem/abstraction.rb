@@ -17,11 +17,11 @@ module LyambdaGem
     def fresh_variable(term)
       cnt = 1
 
-      while term.free_variables.include?("x#{cnt}")
+      while term.free_variables.include?("z#{cnt}")
         cnt += 1
       end
 
-      return Variable.new("x#{cnt}")     
+      return Variable.new("z#{cnt}")     
     end
 
     #Подстановка
