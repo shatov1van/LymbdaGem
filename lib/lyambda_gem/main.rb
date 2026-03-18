@@ -23,6 +23,7 @@ module LyambdaGem
     v = Variable.new("v")
     w = Variable.new("w")
     t = Variable.new("t")
+    z1 = Variable.new("z1")
 
     app = Application.new(Abstraction.new(x, Application.new(Application.new(x, Application.new(x, Application.new(y,z))), x)), Abstraction.new(u, Application.new(u, v)))
     puts "Тест 1: на лямбде #{app.to_s}\nРедуцирование:\n"
@@ -104,14 +105,18 @@ module LyambdaGem
     puts "Проверка правила №7: [N/x](λy.P) = (λz.([N/x]([z/y]P))),\n(если free_variables(P).include?(y) == true && free_variables(N).include?(y) == true && free_variables(NP).include?(z) == false"
     app71 = Application.new(Abstraction.new(x, Abstraction.new(u, Application.new(x, u))), u)
     puts "\nТест 7.1: на лямбде #{app71.to_s}\nРедуцирование:\n"
-    res_app71 = to_normal(app71)
-    puts "Результат: #{to_normal(res_app71).to_s}"
+    puts "Результат: #{to_normal(app71).to_s}"
 
-    app72 = Application.new(Abstraction.new(u, Application.new(res_app71, Application.new(u, t))), Application.new(w, Variable.new("z1")))
+    app72 = Application.new(Abstraction.new(u, Application.new(Abstraction.new(z1, Application.new(u, z1)), Application.new(u, t))), Application.new(w, z1))
     puts "\nТест 7.2: на лямбде #{app72.to_s}\nРедуцирование:\n"
     puts "Результат: #{to_normal(app72).to_s}"
 
     app73 = Application.new(Abstraction.new(t, Abstraction.new(w, Application.new(x, Application.new(z,t)))), w)
     puts "\nТест 7.3: на лямбде #{app73.to_s}\nРедуцирование:\n"
     puts "Результат: #{to_normal(app73).to_s}"
+
+    z2 = Variable.new("z2")
+    appbeta = Application.new(Abstraction.new(z1, Abstraction.new(z2, Application.new(w, z1))), Application.new(w, z2))
+    puts "\nТест бета: на лямбде #{appbeta.to_s}\nРедуцирование:\n"
+    puts "Результат: #{to_normal(appbeta).to_s}"
 end

@@ -16,8 +16,8 @@ module LyambdaGem
     #Получение новой переменной относительно терма (для правила 7)
     def fresh_variable(term)
       cnt = 1
-
-      while term.free_variables.include?("z#{cnt}")
+      fv = term.free_variables
+      while fv.any?{|variable| variable.name == "z#{cnt}"}
         cnt += 1
       end
 
