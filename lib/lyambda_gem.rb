@@ -10,16 +10,20 @@ require_relative "lyambda_gem/reducer"
 
 module LyambdaGem
   class Error < StandardError; end
-  
-  def self.var(name)
+
+  extend self 
+
+  def var(name)
     Variable.new(name)
   end
   
-  def self.abs(param, body)
+  def abs(param, body)
     Abstraction.new(param, body)
   end
   
-  def self.app(left, right)
+  def app(left, right)
     Application.new(left, right)
   end
+
+  module_function :var, :abs, :app
 end
