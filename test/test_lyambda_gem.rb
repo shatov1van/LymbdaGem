@@ -20,6 +20,6 @@ class TestLyambdaGem < Minitest::Test
   #Проверка редуцирования (λx.((x(x(yz)))x)(λu.(uv)) -> ((((yz)v)v)(λu.(uv)))
   def test_reduce_one
     app = LyambdaGem::Application.new(LyambdaGem::Abstraction.new(@x, LyambdaGem::Application.new(LyambdaGem::Application.new(@x, LyambdaGem::Application.new(@x, LyambdaGem::Application.new(@y,@z))), @x)), LyambdaGem::Abstraction.new(@u, LyambdaGem::Application.new(@u, @v)))
-    assert_equal "((((yz)v)v)(λu.(uv)))", to_normal(app).to_s
+    assert_equal "((((yz)v)v)(λu.(uv)))", LyambdaGem::Reducer.to_normal(app).to_s
   end
 end

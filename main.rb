@@ -4,17 +4,6 @@ require_relative 'abstraction'
 require_relative 'application'
 require_relative 'version'
 
-def to_normal(term) 
-    puts "#{term}"
-    while term.reduceable?
-        term = term.reduce
-        puts "#{term}"
-    end
-    term
-    # puts "#{term.left}  | r-le: #{term.left.reduceable?} "
-    # puts "#{term.right}  | r-le: #{term.right.reduceable?} "
-end
-
 module LyambdaGem
     x = Variable.new("x")
     y = Variable.new("y")
