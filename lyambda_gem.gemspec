@@ -5,8 +5,8 @@ require_relative "lib/lyambda_gem/version"
 Gem::Specification.new do |spec|
   spec.name = "lyambda_gem"
   spec.version = LyambdaGem::VERSION
-  spec.authors = ["shatov1van"]
-  spec.email = ["ivanshatov13@gmail.com"]
+  spec.authors = ["shatov1van", "chokopiku61"]
+  spec.email = ["ivanshatov13@gmail.com", "tim.23tim23.23@gmail.com"]
 
   spec.summary = "TODO: Write a short summary, because RubyGems requires one."
   spec.description = "TODO: Write a longer description or delete this line."
