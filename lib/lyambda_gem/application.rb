@@ -27,9 +27,7 @@ module LyambdaGem
       #puts @left.body.substitute(@right, @left.parameter)
       
       if @left.is_a?(Abstraction)
-        puts "  [DEBUG] Reducing: (#{@left}) applied to #{@right}"
         result = @left.body.substitute(@right, @left.parameter) 
-        puts "  [DEBUG] Result of substitution: #{result}"
         return result
       end
 
