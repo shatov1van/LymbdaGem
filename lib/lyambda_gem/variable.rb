@@ -36,5 +36,13 @@ module LyambdaGem
     def ==(other)
       other.is_a?(Variable) && @name == other.name
     end
+
+    def hash
+      @name.hash
+    end
+
+    def eql?(other)
+      other.is_a?(Variable) && @name == other.name
+    end
   end
 end

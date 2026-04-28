@@ -25,7 +25,13 @@ module LyambdaGem
       #puts "  app:#{self.to_s} | r-able: #{reduceable?}"
       return self unless reduceable?
       #puts @left.body.substitute(@right, @left.parameter)
-      return @left.body.substitute(@right, @left.parameter) if @left.is_a?(Abstraction)
+      
+      if @left.is_a?(Abstraction)
+        puts "  [DEBUG] Reducing: (#{@left}) applied to #{@right}"
+        result = @left.body.substitute(@right, @left.parameter) 
+        puts "  [DEBUG] Result of substitution: #{result}"
+        return result
+      end
 
       return Application.new(@left.reduce, @right) if @left.reduceable? 
 

@@ -7,6 +7,7 @@ require_relative "lyambda_gem/variable"
 require_relative "lyambda_gem/abstraction"
 require_relative "lyambda_gem/application"
 require_relative "lyambda_gem/reducer"
+require_relative "lyambda_gem/parser"
 
 module LyambdaGem
   class Error < StandardError; end
